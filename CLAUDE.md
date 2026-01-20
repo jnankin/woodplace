@@ -6,11 +6,12 @@ This is a modern, responsive static website for Wood Place Property Management, 
 
 ## Tech Stack
 
-- **Static Site Generator**: Jekyll 4.3
+- **Static Site Generator**: Jekyll 3.10 (via github-pages gem)
 - **Styling**: Tailwind CSS 3.4
 - **Build Tools**: Node.js (for Tailwind), Ruby (for Jekyll)
 - **CSS Processing**: PostCSS with Autoprefixer
 - **Font**: Inter (Google Fonts)
+- **Deployment**: GitHub Pages (automatic building enabled)
 
 ## How It Works
 
@@ -152,6 +153,8 @@ The single-page site includes:
 
 ## Production Build
 
+### Local Build
+
 ```bash
 # 1. Build optimized CSS
 npx tailwindcss -i ./assets/css/main.css -o ./assets/css/styles.css --minify
@@ -160,6 +163,37 @@ npx tailwindcss -i ./assets/css/main.css -o ./assets/css/styles.css --minify
 bundle exec jekyll build
 
 # Output is in _site/ directory
+```
+
+### GitHub Pages Deployment
+
+This site is configured to use GitHub Pages automatic building:
+
+1. **Commit the compiled CSS**: The `assets/css/styles.css` file must be committed to the repository
+   ```bash
+   git add assets/css/styles.css
+   git commit -m "Update compiled CSS"
+   ```
+
+2. **Push to GitHub**: Push your changes to the `main` branch
+   ```bash
+   git push origin main
+   ```
+
+3. **Enable GitHub Pages**:
+   - Go to your repository settings on GitHub
+   - Navigate to "Pages" in the sidebar
+   - Under "Source", select the `main` branch
+   - GitHub will automatically build and deploy your site
+
+4. **CSS Compilation**: Since GitHub Pages builds with Jekyll only, Tailwind CSS must be compiled locally and the `styles.css` file must be committed to the repository. GitHub Pages will serve the pre-compiled CSS file.
+
+**Important**: Unlike development, GitHub Pages does not run the Tailwind build process. Always compile and commit your CSS before pushing:
+```bash
+npx tailwindcss -i ./assets/css/main.css -o ./assets/css/styles.css --minify
+git add assets/css/styles.css
+git commit -m "Update compiled CSS"
+git push
 ```
 
 ## Notes for AI Assistants
